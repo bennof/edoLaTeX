@@ -1,0 +1,453 @@
+\documentclass[]{edoxws}
+
+\renewcommand\examname{2. Arbeit }
+\renewcommand\sign{B. Falkner}
+
+\begin{document}
+
+\pdate{März 2026}
+\begin{exam}{Informatik, WP 09}
+
+% ==================================================
+\exercise[Grundlagen – Begriffe der Verschlüsselung €]{
+
+  \subexercise{
+    Kreuze alle richtigen Aussagen an:
+    \begin{itemize}
+      \item[$\Box$] Klartext ist der ursprüngliche, lesbare Text.
+      \item[$\Box$] Chiffretext ist eine unverschlüsselte Nachricht.
+      \item[$\Box$] Ein Schlüssel bestimmt, wie verschlüsselt wird.
+      \item[$\Box$] Verschlüsselung dient dem Schutz von Daten.
+    \end{itemize}
+
+    \begin{enum}
+      \item Klartext ist der ursprüngliche, lesbare Text.
+      \item Chiffretext ist eine unverschlüsselte Nachricht.
+      \item Ein Schlüssel bestimmt, wie verschlüsselt wird.
+      \item Verschlüsselung dient dem Schutz von Daten.
+    \end{enum}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Klartext ist der ursprüngliche, lesbare Text.\pp
+        \item[$\Box$] Chiffretext ist eine unverschlüsselte Nachricht.
+        \item[$\boxtimes$] Ein Schlüssel bestimmt, wie verschlüsselt wird.\pp
+        \item[$\boxtimes$] Verschlüsselung dient dem Schutz von Daten.\pp
+      \end{itemize}
+      \pp[1]
+    }
+  }
+
+  \subexercise{
+    Welche Begriffe gehören zur Verschlüsselung?
+    \begin{itemize}
+      \item[$\Box$] Klartext
+      \item[$\Box$] Schlüssel
+      \item[$\Box$] Schleife
+      \item[$\Box$] Chiffretext
+      \item[$\Box$] Bedingung
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Klartext\pp
+        \item[$\boxtimes$] Schlüssel\pp
+        \item[$\Box$] Schleife
+        \item[$\boxtimes$] Chiffretext\pp
+        \item[$\Box$] Bedingung
+      \end{itemize}
+      \pp[2]
+    }
+  }
+}
+
+% ==================================================
+\exercise[Caesar-Verschlüsselung]{
+
+  \subexercise{
+    Kreuze an:
+    \begin{itemize}
+      \item[$\Box$] Bei der Caesar-Verschlüsselung werden Buchstaben verschoben.
+      \item[$\Box$] Es gibt unendlich viele mögliche Schlüssel.
+      \item[$\Box$] Häufigkeitsanalyse kann das Verfahren angreifen.
+      \item[$\Box$] Die Caesar-Verschlüsselung gilt heute als sicher.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Bei der Caesar-Verschlüsselung werden Buchstaben verschoben.\pp
+        \item[$\Box$] Es gibt unendlich viele mögliche Schlüssel.
+        \item[$\boxtimes$] Häufigkeitsanalyse kann das Verfahren angreifen.\pp
+        \item[$\Box$] Die Caesar-Verschlüsselung gilt heute als sicher.
+      \end{itemize}
+      \pp[2]
+    }
+  }
+
+  \subexercise{
+    Warum ist die Caesar-Verschlüsselung unsicher?
+    \begin{itemize}
+      \item[$\Box$] Es gibt nur wenige mögliche Schlüssel.
+      \item[$\Box$] Jeder kennt das Alphabet.
+      \item[$\Box$] Häufige Buchstaben können erkannt werden.
+      \item[$\Box$] Der Schlüssel ist immer öffentlich.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Es gibt nur wenige mögliche Schlüssel.\pp
+        \item[$\Box$] Jeder kennt das Alphabet.
+        \item[$\boxtimes$] Häufige Buchstaben können erkannt werden.\pp
+        \item[$\Box$] Der Schlüssel ist immer öffentlich.
+      \end{itemize}
+      \pp[2]
+    }
+  }
+
+  \subexercise{
+    Häufigkeitsanalyse\\
+    Ein Angreifer untersucht, wie oft einzelne Buchstaben im Chiffretext vorkommen.
+
+    Kreuze an, welche Aussagen zur Häufigkeitsanalyse passen:
+    \begin{itemize}
+      \item[$\Box$] Im Deutschen kommt der Buchstabe E besonders häufig vor.
+      \item[$\Box$] Häufigkeitsanalyse funktioniert nur bei sehr kurzen Texten.
+      \item[$\Box$] Durch häufige Buchstaben kann der Schlüssel vermutet werden.
+      \item[$\Box$] Häufigkeitsanalyse ist nur bei modernen Verfahren möglich.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Im Deutschen kommt der Buchstabe E besonders häufig vor.\pp
+        \item[$\Box$] Häufigkeitsanalyse funktioniert nur bei sehr kurzen Texten.
+        \item[$\boxtimes$] Durch häufige Buchstaben kann der Schlüssel vermutet werden.\pp
+        \item[$\Box$] Häufigkeitsanalyse ist nur bei modernen Verfahren möglich.
+      \end{itemize}
+      \pp[2]
+    }
+  }
+}
+
+% ==================================================
+\exercise[Symmetrische Verschlüsselung]{
+
+  \subexercise{
+    Kreuze alle richtigen Aussagen an:
+    \begin{itemize}
+      \item[$\Box$] Sender und Empfänger benutzen denselben Schlüssel.
+      \item[$\Box$] Der Schlüssel muss geheim bleiben.
+      \item[$\Box$] Es gibt einen öffentlichen und einen privaten Schlüssel.
+      \item[$\Box$] Der Schlüsselaustausch ist ein Sicherheitsproblem.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Sender und Empfänger benutzen denselben Schlüssel.\pp
+        \item[$\boxtimes$] Der Schlüssel muss geheim bleiben.\pp
+        \item[$\Box$] Es gibt einen öffentlichen und einen privaten Schlüssel.
+        \item[$\boxtimes$] Der Schlüsselaustausch ist ein Sicherheitsproblem.\pp
+      \end{itemize}
+      \pp[1]
+    }
+  }
+
+  \subexercise{
+    Welche Beispiele nutzen symmetrische Verschlüsselung?
+    \begin{itemize}
+      \item[$\Box$] Passwörter
+      \item[$\Box$] Verschlüsselte Datei auf USB-Stick
+      \item[$\Box$] HTTPS beim ersten Seitenaufruf
+      \item[$\Box$] Öffentlicher Schlüssel
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Passwörter\pp
+        \item[$\boxtimes$] Verschlüsselte Datei auf USB-Stick\pp
+        \item[$\Box$] HTTPS beim ersten Seitenaufruf
+        \item[$\Box$] Öffentlicher Schlüssel
+      \end{itemize}
+      \pp[2]
+    }
+  }
+
+  \subexercise{
+    Vorteile und Nachteile symmetrischer Verschlüsselung\\
+    Kreuze an, welche Aussagen richtig sind:
+
+    \begin{itemize}
+      \item[$\Box$] Symmetrische Verschlüsselung ist sehr schnell.
+      \item[$\Box$] Symmetrische Verschlüsselung eignet sich gut für große Datenmengen.
+      \item[$\Box$] Der geheime Schlüssel muss sicher übertragen werden.
+      \item[$\Box$] Die Schlüsselübertragung ist unproblematisch.
+      \item[$\Box$] Symmetrische Verfahren sind langsamer als asymmetrische.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Symmetrische Verschlüsselung ist sehr schnell.\pp
+        \item[$\boxtimes$] Symmetrische Verschlüsselung eignet sich gut für große Datenmengen.\pp
+        \item[$\boxtimes$] Der geheime Schlüssel muss sicher übertragen werden.\pp
+        \item[$\Box$] Die Schlüsselübertragung ist unproblematisch.
+        \item[$\Box$] Symmetrische Verfahren sind langsamer als asymmetrische.
+      \end{itemize}
+      \pp[2]
+    }
+  }
+}
+
+% ==================================================
+\exercise[Asymmetrische Verschlüsselung / Public-Key]{
+
+  \subexercise{
+    Kreuze an:
+    \begin{itemize}
+      \item[$\Box$] Jeder besitzt einen öffentlichen und einen privaten Schlüssel.
+      \item[$\Box$] Der private Schlüssel darf weitergegeben werden.
+      \item[$\Box$] Mit dem öffentlichen Schlüssel wird verschlüsselt.
+      \item[$\Box$] Mit dem privaten Schlüssel wird entschlüsselt.
+      \item[$\Box$] Es ist kein geheimer Schlüsselaustausch nötig.
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Jeder besitzt einen öffentlichen und einen privaten Schlüssel.\pp
+        \item[$\Box$] Der private Schlüssel darf weitergegeben werden.
+        \item[$\boxtimes$] Mit dem öffentlichen Schlüssel wird verschlüsselt.\pp
+        \item[$\boxtimes$] Mit dem privaten Schlüssel wird entschlüsselt.\pp
+        \item[$\boxtimes$] Es ist kein geheimer Schlüsselaustausch nötig.\pp
+      \end{itemize}
+      \pp[1]
+    }
+  }
+
+  \subexercise{
+    Ordne zu: Welche Aussagen passen zur asymmetrischen Verschlüsselung?
+    \begin{itemize}
+      \item[$\Box$] sehr schnell
+      \item[$\Box$] zwei verschiedene Schlüssel
+      \item[$\Box$] sicherer Schlüsselaustausch
+      \item[$\Box$] gleicher Schlüssel für alle
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\Box$] sehr schnell
+        \item[$\boxtimes$] zwei verschiedene Schlüssel\pp
+        \item[$\boxtimes$] sicherer Schlüsselaustausch\pp
+        \item[$\Box$] gleicher Schlüssel für alle
+      \end{itemize}
+      \pp[2]
+    }
+  }
+
+  \subexercise{
+  Erkläre in eigenen Worten Schritt für Schritt, wie eine asymmetrische
+  Verschlüsselung funktioniert.  
+  Gehe dabei auf den öffentlichen und den privaten Schlüssel ein.
+
+  \medskip
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+  \vspace{0.6cm}
+  \hrule
+
+  \solve{
+    Zuerst besitzt der Empfänger einen öffentlichen und einen privaten Schlüssel\pp.
+    Der öffentliche Schlüssel wird weitergegeben\pp.
+    Der Sender verschlüsselt die Nachricht mit dem öffentlichen Schlüssel des Empfängers\pp.
+    Die verschlüsselte Nachricht wird übertragen\pp.
+    Nur der private Schlüssel des Empfängers kann die Nachricht entschlüsseln\pp.
+    Dadurch kann kein Angreifer den Inhalt lesen\pp.
+  }
+}
+
+
+}
+
+
+
+
+\exercise[Verschlüsselung beim Online-Banking]{
+
+\vspace{0.5cm}
+\textbf{
+  Wie funktioniert Verschlüsselung beim Online-Banking?}
+
+Wenn du dich beim Online-Banking anmeldest, müssen sehr sensible Daten geschützt werden,
+zum Beispiel deine Zugangsdaten oder Überweisungen..
+
+Zu Beginn der Verbindung baut dein Browser eine \textbf{HTTPS-Verbindung} zur Bank auf.
+Dabei nutzt die Bank ein \textbf{Zertifikat}, das ihren öffentlichen Schlüssel enthält.
+So kann dein Browser sicher überprüfen, ob er wirklich mit der echten Bank spricht
+und nicht mit einem Betrüger.
+
+Anschließend wird über diese sichere Verbindung ein \textbf{geheimer Sitzungsschlüssel}
+ausgetauscht. Ab diesem Moment erfolgt die gesamte weitere Kommunikation
+mit diesem Sitzungsschlüssel.
+Das hat einen wichtigen Grund: so ist es deutlich
+\textbf{schneller} und eignet sich besser für größere Datenmengen.
+
+Während der Anmeldung werden Benutzername, Passwort und weitere Sicherheitsmerkmale
+(z.\,B. TAN) über die verschlüsselte Verbindung übertragen.
+So werden die Schutzziele der Datensicherheit erfüllt:
+\textbf{Vertraulichkeit} (niemand kann mitlesen),
+\textbf{Integrität} (Daten werden nicht verändert)
+und \textbf{Authentizität} (die Bank ist echt).
+
+\vspace{0.5cm}
+
+% --------------------------------------------------
+\subexercise{
+\textbf{Ablauf der Verschlüsselung:} Kreuze alle richtigen Aussagen an:
+
+\begin{itemize}
+  \item[$\Box$] Beim Online-Banking wird zuerst asymmetrisch verschlüsselt.
+  \item[$\Box$] Der öffentliche Schlüssel der Bank ist geheim.
+  \item[$\Box$] Asymmetrische Verschlüsselung dient dem sicheren Schlüsselaustausch.
+  \item[$\Box$] Symmetrische Verschlüsselung ist schneller als asymmetrische.
+  \item[$\Box$] Nach dem Verbindungsaufbau wird die gesamte Kommunikation symmetrisch verschlüsselt.
+\end{itemize}
+
+\solve{
+\begin{itemize}
+  \item[$\boxtimes$] Beim Online-Banking wird zuerst asymmetrisch verschlüsselt.\pp
+  \item[$\Box$] Der öffentliche Schlüssel der Bank ist geheim.
+  \item[$\boxtimes$] Asymmetrische Verschlüsselung dient dem sicheren Schlüsselaustausch.\pp
+  \item[$\boxtimes$] Symmetrische Verschlüsselung ist schneller als asymmetrische.\pp
+  \item[$\boxtimes$] Nach dem Verbindungsaufbau wird die gesamte Kommunikation symmetrisch verschlüsselt.\pp
+\end{itemize}
+\pp[1]
+}
+}
+
+% --------------------------------------------------
+\subexercise{
+\textbf{Vorteile der Kombination:} Warum werden beim Online-Banking beide Verfahren kombiniert?
+
+\begin{itemize}
+  \item[$\Box$] Asymmetrische Verschlüsselung ist besonders schnell.
+  \item[$\Box$] Symmetrische Verschlüsselung eignet sich für große Datenmengen.
+  \item[$\Box$] Der sichere Austausch eines geheimen Schlüssels wird ermöglicht.
+  \item[$\Box$] Dadurch kann vollständig auf Verschlüsselung verzichtet werden.
+\end{itemize}
+
+\solve{
+\begin{itemize}
+  \item[$\Box$] Asymmetrische Verschlüsselung ist besonders schnell.
+  \item[$\boxtimes$] Symmetrische Verschlüsselung eignet sich für große Datenmengen.\pp
+  \item[$\boxtimes$] Der sichere Austausch eines geheimen Schlüssels wird ermöglicht.\pp
+  \item[$\Box$] Dadurch kann vollständig auf Verschlüsselung verzichtet werden.
+\end{itemize}
+\pp[2]
+}
+}
+
+% --------------------------------------------------
+\subexercise{
+Beschreibe in eigenen Worten den \textbf{kompletten Ablauf der Anmeldung}
+beim Online-Banking.
+Gehe dabei auf folgende Punkte ein:
+\begin{itemize}
+  \item Aufbau der sicheren Verbindung
+  \item Rolle der Verschlüsselung zu Beginn
+  \item Übergang zur dauerhaften Verschlüsselung der Verbindung 
+  \item Übertragung der Zugangsdaten
+\end{itemize}
+
+\medskip
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+\vspace{0.6cm}
+\hrule
+
+\solve{
+Beim Aufruf der Bankseite wird zuerst eine HTTPS-Verbindung aufgebaut\pp.
+Dabei überprüft der Browser mithilfe des Zertifikats den öffentlichen Schlüssel der Bank\pp.
+Anschließend wird asymmetrische Verschlüsselung genutzt, um einen geheimen Sitzungsschlüssel auszutauschen\pp.
+Danach erfolgt die weitere Kommunikation symmetrisch, da dies schneller ist\pp.
+So sind die Daten vertraulich, unverändert und der Absender ist eindeutig\pp.
+}
+}
+
+}
+
+% ==================================================
+\exercise[Schutzziele der Datensicherheit]{
+
+  \subexercise{
+    Kreuze die Schutzziele an:
+    \begin{itemize}
+      \item[$\Box$] Vertraulichkeit
+      \item[$\Box$] Integrität
+      \item[$\Box$] Geschwindigkeit
+      \item[$\Box$] Authentizität
+      \item[$\Box$] Verbindlichkeit
+    \end{itemize}
+
+    \solve{
+      \begin{itemize}
+        \item[$\boxtimes$] Vertraulichkeit\pp
+        \item[$\boxtimes$] Integrität\pp
+        \item[$\Box$] Geschwindigkeit
+        \item[$\boxtimes$] Authentizität\pp
+        \item[$\boxtimes$] Verbindlichkeit\pp
+      \end{itemize}
+      \pp[1]
+    }
+  }
+
+  \subexercise{
+    Welche Aussage beschreibt Integrität?
+    \begin{itemize}
+      \item[$\Box$] Nur Berechtigte dürfen lesen.
+      \item[$\Box$] Daten wurden nicht verändert.
+      \item[$\Box$] Der Absender ist bekannt.
+      \item[$\Box$] Niemand kann etwas abstreiten.
+    \end{itemize}
+
+    \solve{
+      Daten wurden nicht verändert\pp[4]
+    }
+  }
+}
+
+% ==================================================
+\exercise[Ordnungspunkte]{
+  \subexercise*{
+    SEB, sprachlich ordentlich, Form und Inhalt sind gut strukturiert und verständlich.
+    \solve{
+      \begin{itemize}
+        \item SEB \pp
+        \item Sprachlich ordentlich \pp
+        \item Form und Inhalt gut strukturiert \pp
+      \end{itemize}
+    }
+  }
+}
+
+\end{exam}
+\end{document}

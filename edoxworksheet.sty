@@ -1,0 +1,181 @@
+% edoxworksheet.sty — worksheet settings for EDOX classes
+%
+% Purpose:
+%   Provides environments for worksheets, tests and exams.
+%   This package handles:
+%     - worksheet titles
+%     - page style for worksheets
+%     - point display and summaries
+%     - exam summaries and grading
+%
+% Notes:
+%   - Worksheets are intended as standalone documents.
+%   - Therefore \clearpage is intentionally used to enforce
+%     page boundaries between worksheets and summaries.
+%
+% copyright (c) 2025 Benjamin Benno Falkner
+% SPDX-License-Identifier: MIT
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{edoxworksheet}[2025/09/28 Worksheet settings for edox classes]
+
+% ------------------------------------------------------------
+% Dependencies
+% ------------------------------------------------------------
+\RequirePackage{edoxexercise}
+\RequirePackage{edoxgradesde}
+
+% ------------------------------------------------------------
+% Language-dependent labels
+% ------------------------------------------------------------
+\providecommand{\worksheetname}{\iflanguage{ngerman}{Arbeitsblatt}{Worksheet}}
+\providecommand{\testname}{\iflanguage{ngerman}{Test}{Test}}
+\providecommand{\examname}{\iflanguage{ngerman}{Klausur}{Exam}}
+\providecommand{\totalname}{\iflanguage{ngerman}{Gesamt}{Total}}
+\providecommand{\gradename}{\iflanguage{ngerman}{Note}{Grade}}
+\providecommand{\wishname}{\iflanguage{ngerman}{Viel Erfolg!}{Good Luck!}}
+\providecommand{\solutionname}{\iflanguage{ngerman}{Lösung}{Solution}}
+
+% ------------------------------------------------------------
+% Counters
+% ------------------------------------------------------------
+\providecounter{pages}
+\providecounter{worksheet}
+
+% ------------------------------------------------------------
+% Name field shown in worksheet header
+% If \studentname is defined, it is printed automatically.
+% ------------------------------------------------------------
+\newcommand*\edo@namefield{%
+  Name: \ifcsname studentname\endcsname \studentname\else \underline{\hspace{6cm}}\fi
+}
+
+% ------------------------------------------------------------
+% Page style for worksheets
+%
+% Uses LaTeX page counter (\thepage) instead of a manual counter.
+% ------------------------------------------------------------
+\def\ps@edoWorkSheet{%
+  \def\@oddhead{\hbox to\hsize{\edo@namefield\hfill}}%
+  \let\@evenhead\@oddhead
+  \def\@oddfoot{\hbox to\hsize{\hfil\thepage\hfil}}%
+  \let\@evenfoot\@oddfoot
+}
+
+% ------------------------------------------------------------
+% Helper commands
+% ------------------------------------------------------------
+\providecommand{\setpoints}[1]{\setcounter{points}{#1}}
+\providecommand{\sign}{}
+
+% ------------------------------------------------------------
+% Worksheet title support
+% ------------------------------------------------------------
+
+% Date field
+\def\@pdate{}
+\newcommand\pdate[1]{\def\@pdate{#1}}
+
+% Title layout
+\newcommand{\worksheettitle}[2]{%
+  \null
+  \noindent{\huge \textsc{\textbf{#1}}}\hfill\small{}\\
+  {\large \textbf{#2}}\hfill{\small \@pdate}\\[2ex]
+  \vspace{6ex}%
+}
+
+% ------------------------------------------------------------
+% Section style used in exams
+% ------------------------------------------------------------
+\newcommand{\wssection}[1]{%
+  \vspace{1em}
+  \noindent{\Large\bfseries #1}%
+  \par\vspace{0.5em}
+  \@tosolution{\vspace{.6em}\noindent\large\textbf{#1 : }\par\vspace{0.5em}}
+}
+
+% ------------------------------------------------------------
+% Worksheet initialization helper
+%
+% Resets counters and enforces a new page.
+% The page break is intentional because worksheets are
+% treated as standalone units.
+% ------------------------------------------------------------
+\newcommand{\beginws}{
+  \clearpage
+  \setcounter{c@exercise}{0}%
+  \setcounter{c@subexercise}{0}%
+  \setcounter{points}{0}%
+  \setcounter{subexercisepoints}{0}%
+  \pagestyle{edoWorkSheet}%
+}
+
+% ------------------------------------------------------------
+% Worksheet environment
+% ------------------------------------------------------------
+\newenvironment{worksheet}[1]{%
+  \beginws
+  \stepcounter{worksheet}%
+  \worksheettitle{\worksheetname~\theworksheet}{#1}%
+  \begingroup
+  \parindent=0pt
+}{%
+  \clearpage
+  \endgroup
+}
+
+% ------------------------------------------------------------
+% Test environment (shows points)
+% ------------------------------------------------------------
+\newenvironment{test}[1]{%
+  \beginws
+  \stepcounter{worksheet}%
+  \worksheettitle{\testname~\theworksheet}{#1}%
+  \begingroup
+  \@points@showtrue
+  \parindent=0pt
+}{%
+  \clearpage
+  \endgroup
+}
+
+% ------------------------------------------------------------
+% Exam summary helpers
+% ------------------------------------------------------------
+\providecommand{\examfinal}{
+  \vskip1cm
+  \textbf{\wishname}\hfill\textbf{\totalname: \thepoints\space\pointsname}
+}
+
+\providecommand{\examsummary}[1][]{
+  \printsolutions
+  \hfill\textbf{\totalname: \underline{\hspace{1cm}}/ \thepoints\space\pointsname}
+  
+  \gradestable{\c@points}
+  
+  \vskip 1mm
+  \noindent\textbf{\gradename: \underline{\hspace{4cm}}}
+
+  \vskip1cm
+  \noindent \underline{\hspace{4cm}}\\
+  \noindent #1
+}
+
+% ------------------------------------------------------------
+% Exam environment
+% ------------------------------------------------------------
+\newenvironment{exam}[1]{%
+  \beginws
+  \stepcounter{worksheet}%
+  \worksheettitle{\examname}{#1}%
+  \begingroup
+  \@points@showtrue
+  \parindent=0pt
+  \let\section\wssection
+}{%
+  \examfinal
+  \clearpage
+  \examsummary[\sign]
+  \clearpage
+  \endgroup
+}

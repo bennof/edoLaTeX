@@ -1,0 +1,129 @@
+% edoxbase.sty — shared base configuration for EDOX classes
+%
+% Purpose:
+%   This package provides the common foundation for all EDOX
+%   document classes (worksheets, articles, books).
+%
+%   It is responsible for:
+%     - language and font setup
+%     - basic math and graphics support
+%     - default page layout
+%     - shared exercise and worksheet infrastructure
+%
+%   Layout and document-type specific behaviour should
+%   preferably be implemented in separate packages or classes.
+%
+% copyright (c) 2025 Benjamin Benno Falkner
+% SPDX-License-Identifier: MIT
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{edoxbase}[2025/09/28 Shared base for edox classes]
+
+% ------------------------------------------------------------
+% Engine detection and encoding
+% ------------------------------------------------------------
+\RequirePackage{iftex}
+
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage{textcomp}
+\fi
+
+
+
+\newif\ifedox@sourcesans
+\DeclareOption{sourcesans}{\edox@sourcesanstrue}
+\DeclareOption{defaultfont}{\edox@sourcesansfalse}
+
+\ExecuteOptions{defaultfont}
+\ProcessOptions\relax
+
+
+% ------------------------------------------------------------
+% Language and fonts
+% ------------------------------------------------------------
+\RequirePackage[ngerman]{babel}
+\ifedox@sourcesans
+  \usepackage{sourcesanspro}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \RequirePackage{lmodern}
+\fi
+
+% ------------------------------------------------------------
+% Mathematics and tables
+% ------------------------------------------------------------
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{array}
+
+% ------------------------------------------------------------
+% Graphics
+% ------------------------------------------------------------
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+
+% ------------------------------------------------------------
+% Page layout
+% Default layout suitable for worksheets and short documents
+% ------------------------------------------------------------
+\RequirePackage[
+  a4paper,
+  inner=28mm,
+  outer=20mm,
+  top=15mm,
+  bottom=15mm,
+  includeheadfoot
+]{geometry}
+
+% ------------------------------------------------------------
+% Quotations
+% ------------------------------------------------------------
+\RequirePackage{csquotes}
+
+% ------------------------------------------------------------
+% Headers and footers (KOMA)
+% ------------------------------------------------------------
+\RequirePackage[automark]{scrlayer-scrpage}
+\clearpairofpagestyles
+\ohead{\headmark}
+\ofoot{\pagemark}
+
+% ------------------------------------------------------------
+% Bibliography defaults
+% (Used mainly in articles or books; harmless if unused)
+% ------------------------------------------------------------
+\RequirePackage[backend=biber,style=numeric]{biblatex}
+
+% ------------------------------------------------------------
+% EDOX subsystems
+% ------------------------------------------------------------
+\RequirePackage{edoxexercise}
+\RequirePackage{edoxworksheet}
+
+% ------------------------------------------------------------
+% Simple roman-numbered list environment
+%
+% Provides:
+%   \begin{enum} ... \end{enum}
+%
+% Intended for short lists inside worksheets.
+% ------------------------------------------------------------
+\newcounter{@enum}
+\renewcommand{\the@enum}{\roman{@enum}.}
+
+\newenvironment{enum}
+{%
+  \begin{list}{\the@enum}{%
+    \usecounter{@enum}
+    \setlength{\labelwidth}{1.5em}      % Breite der Nummernspalte
+    \setlength{\labelsep}{0.1em}      % Abstand zur Aufgabe
+    \setlength{\leftmargin}{2,em}    % Gesamteinzug
+    \setlength{\itemindent}{0pt}
+    \let\makelabel\relax              % linksbündig
+  }%
+}
+{%
+  \end{list}
+}

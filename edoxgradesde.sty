@@ -1,0 +1,116 @@
+% edoxgradesde.sty — German grading table for EDOX classes
+%
+% Purpose:
+%   Provides a grading table based on the German point system.
+%
+%   Main command:
+%     \gradestable{<maxpoints>}
+%
+%   This prints a table showing grade thresholds calculated
+%   as percentage values of the total points.
+%
+%   The calculation uses integer arithmetic only and rounds up.
+%
+% copyright (c) 2025 Benjamin Benno Falkner
+% SPDX-License-Identifier: MIT
+
+
+% ------------------------------------------------------------
+% Internal registers used for integer arithmetic
+% ------------------------------------------------------------
+\newcount\h@multpm
+\newcount\h@rest
+
+
+% ------------------------------------------------------------
+% \multpm[<base>]{<value>}{<percent>}
+%
+% Computes:
+%   ceil(value * percent / base)
+%
+% Default base = 100 (percentage calculation).
+%
+% Example:
+%   \multpm{60}{50}  → 30
+%   \multpm{47}{95}  → rounded up result
+% ------------------------------------------------------------
+\newcommand{\multpm}[3][100]{%
+  \h@multpm=#2
+  \multiply\h@multpm by #3
+
+  % store remainder
+  \h@rest=\h@multpm
+
+  % integer division
+  \divide\h@multpm by #1
+
+  % reconstruct truncated product
+  \multiply\h@multpm by #1
+  \advance\h@rest by -\h@multpm
+
+  % divide to final value
+  \divide\h@multpm by #1
+
+  % round up if remainder exists
+  \ifnum\h@rest > 0
+    \advance\h@multpm by 1
+  \fi
+
+  \the\h@multpm
+}
+
+
+% ------------------------------------------------------------
+% \gradestable{<maxpoints>}
+%
+% Prints a grade table using German grading thresholds.
+% Thresholds are calculated as percentage values of maxpoints.
+% ------------------------------------------------------------
+\newcommand{\gradestable}[1]{%
+  \begingroup
+
+  % Table formatting
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.1}
+  \footnotesize
+
+  \begin{center}
+    \begin{tabular}{|*{17}{c|}}
+      \hline
+      Note &
+      1+ & 1 & 1- &
+      2+ & 2 & 2- &
+      3+ & 3 & 3- &
+      4+ & 4 & 4- &
+      5+ & 5 & 5- & 6 \\
+      \hline
+      Notenpunkte &
+      15 & 14 & 13 &
+      12 & 11 & 10 &
+      9 & 8 & 7 &
+      6 & 5 & 4 &
+      3 & 2 & 1 & 0 \\
+      \hline
+      Punkte &
+      \multpm{#1}{95} &
+      \multpm{#1}{90} &
+      \multpm{#1}{85} &
+      \multpm{#1}{80} &
+      \multpm{#1}{75} &
+      \multpm{#1}{70} &
+      \multpm{#1}{65} &
+      \multpm{#1}{60} &
+      \multpm{#1}{55} &
+      \multpm{#1}{50} &
+      \multpm{#1}{45} &
+      \multpm{#1}{40} &
+      \multpm{#1}{33} &
+      \multpm{#1}{27} &
+      \multpm{#1}{20} &
+      0 \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \endgroup
+}
