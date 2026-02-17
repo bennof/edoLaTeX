@@ -162,6 +162,9 @@ bin:
 test:
 	TEXMFHOME=$(PWD)/$(TEXMF) pdftex -fmt=pdflatex  $(DOC).tex
 
+test-deps:
+	pdftex -fmt=pdflatex  $(DOC).tex
+
 
 
 latex.fmt: $(FILES)
