@@ -99,7 +99,7 @@ fonts:
 ########################################
 
 deps:
-	pdftex -fmt=pdflatex  -recorder $(DOC).tex >/dev/null
+	pdftex -fmt=pdflatex  -recorder $(DOC).tex > deps_build.log 2>/dev/null || true
 	@echo "Copying dependencies into local TEXMF..."
 	@grep '^INPUT ' $(DOC).fls | cut -d' ' -f2 | \
 	grep -E '\.(sty|cls|fd|tfm|pfb|enc|map|def|cfg|ldf|bbx|cbx|lbx|tex|clo|ini)$$' | \
