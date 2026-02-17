@@ -34,6 +34,10 @@ STY_DST := $(patsubst $(SRC)/%.sty,$(PKGDIR)/%.sty,$(STY_SRC))
 
 FILES := $(CLS_DST) $(STY_DST)
 
+EDO_ENV_VAR=EDOLATEXMF
+EDO_ENV_VAL=$(PWD)/$(TEXMF)
+SCRIPT=edolatex.sh
+
 ########################################
 # Targets
 ########################################
@@ -41,6 +45,20 @@ FILES := $(CLS_DST) $(STY_DST)
 .PHONY: all lsr fonts deps clean distclean test bin computermodern
 
 all: lsr fonts  computermodern deps
+	@echo ""
+	@echo "Build completed successfully."
+	@echo ""
+	@echo "To use this LaTeX tree, set:"
+	@echo "  export $(EDO_ENV_VAR)=$(EDO_ENV_VAL)"
+	@echo ""
+	@echo "Optional: install the helper script:"
+	@echo "  cp $(SCRIPT) ~/bin/"
+	@echo "or:"
+	@echo "  install -m 755 $(SCRIPT) /usr/local/bin/"
+	@echo ""
+	@echo "Then run:"
+	@echo "  edolatex.sh test.tex"
+
 
 ########################################
 # Install local packages

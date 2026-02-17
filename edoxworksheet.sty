@@ -56,9 +56,9 @@
 % Uses LaTeX page counter (\thepage) instead of a manual counter.
 % ------------------------------------------------------------
 \def\ps@edoWorkSheet{%
-  \def\@oddhead{\hbox to\hsize{\edo@namefield\hfill}}%
+  \def\@oddhead{\hbox to\hsize{\edo@namefield\hfill\rightmark}}%
   \let\@evenhead\@oddhead
-  \def\@oddfoot{\hbox to\hsize{\hfil\thepage\hfil}}%
+  \def\@oddfoot{\hbox to\hsize{\hfil\thepage}}%
   \let\@evenfoot\@oddfoot
 }
 
@@ -87,11 +87,14 @@
 % ------------------------------------------------------------
 % Section style used in exams
 % ------------------------------------------------------------
-\newcommand{\wssection}[1]{%
+\NewDocumentCommand{\wssection}{o m}{%
   \vspace{1em}
-  \noindent{\Large\bfseries #1}%
+  \IfNoValueTF{#1}
+    {\markright{#2}}   
+    {\markright{#1}} 
+  \noindent{\Large\bfseries #2}%
   \par\vspace{0.5em}
-  \@tosolution{\vspace{.6em}\noindent\large\textbf{#1 : }\par\vspace{0.5em}}
+  \@tosolution{\vspace{.6em}\noindent\large\textbf{#2 : }\par\vspace{0.5em}}
 }
 
 % ------------------------------------------------------------
@@ -165,6 +168,7 @@
 % Exam environment
 % ------------------------------------------------------------
 \newenvironment{exam}[1]{%
+  \markright{}
   \beginws
   \stepcounter{worksheet}%
   \worksheettitle{\examname}{#1}%
@@ -173,9 +177,12 @@
   \parindent=0pt
   \let\section\wssection
 }{%
+
   \examfinal
   \clearpage
+  \markright{\solutionname}
   \examsummary[\sign]
   \clearpage
+  \markright{}
   \endgroup
 }

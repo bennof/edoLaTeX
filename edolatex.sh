@@ -1,29 +1,31 @@
 #!/usr/bin/env sh
 
 # --------------------------------------------------
-# edox — compile LaTeX document using local TEXMF
+# edox — compile LaTeX document using local TEXMF tree
 # --------------------------------------------------
 
 echo "EdoLaTeX 2026"
-TEXMF="$(pwd)/texmf" export TEXMF
-TEXINPUTS=$(pwd)/texmf/tex/edo export TEXINPUTS
-TEXFORMAT=$(pwd)/texmf/tex/edo export TEXFORMAT
-ENCFONTS=$(pwd)/texmf/fonts/enc export ENCFONTS
-TFMFONTS=$(pwd)/texmf/fonts/tfm export TFMFONTS
-TEXFONTMAPS=$(pwd)/texmf/fonts/map export TEXFONTMAPS
-T1FONTS=$(pwd)/texmf/fonts/type1 export T1FONTS
 
+# Use EDOLATEXMF if set, otherwise default to ./texmf
+EDOLATEXMF="${EDOLATEXMF:-$(pwd)/texmf}"
 
+# Export paths so kpathsea finds files only in the local tree
+export TEXMFHOME="$EDOLATEXMF"
+export TEXINPUTS="$EDOLATEXMF/tex//:"
+export TEXFORMATS="$EDOLATEXMF/fmt//:"
+export ENCFONTS="$EDOLATEXMF/fonts/enc//:"
+export TFMFONTS="$EDOLATEXMF/fonts/tfm//:"
+export TEXFONTMAPS="$EDOLATEXMF/fonts/map//:"
+export T1FONTS="$EDOLATEXMF/fonts/type1//:"
 
-
-# Dokumentname: entweder Argument oder test.tex
+# Document name: argument or default test.tex
 DOC="${1:-test.tex}"
 
-# Prüfen, ob Datei existiert
+# Check if file exists
 if [ ! -f "$DOC" ]; then
   echo "File not found: $DOC"
   exit 1
 fi
 
-# Lokalen TEXMF-Tree verwenden
-TEXMFHOME="$TEXMF" pdflatex "$DOC"
+# Compile
+pdflatex "$DOC"

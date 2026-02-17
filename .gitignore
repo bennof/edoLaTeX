@@ -14,7 +14,7 @@
 *.run.xml
 
 # PDFs optional ignorieren
-# *.pdf
+*.pdf
 
 # --------------------------------------------------
 # Temporary files
